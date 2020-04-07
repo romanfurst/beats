@@ -1,0 +1,28 @@
+{
+  "description": "Pipeline for parsing FAST logs",
+  "processors": [
+      {
+          "set" : {
+              "field" : "msg",
+              "value" : "hovno",
+              "ignore_failure" : true
+          },
+          "set" : {
+              "field" : "message",
+              "value" : "prdel",
+              "ignore_failure" : true
+          },
+          "rename" : {
+              "field" : "kubernetes.node.name",
+              "target_field" : "kubernet.noud.nejm",
+              "ignore_failure" : true
+          }
+      }
+    ],
+  "on_failure" : [{
+    "set" : {
+      "field" : "error.message",
+      "value" : "{{ _ingest.on_failure_message }}"
+    }
+  }]
+}

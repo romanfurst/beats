@@ -110,6 +110,16 @@ filebeat.modules:
     # Filebeat will choose the paths depending on your OS.
     #var.paths:
 
+#--------------------------------- Fast Module ---------------------------------
+- module: fast
+  # All logs
+  {fileset}:
+    enabled: true
+
+    # Set custom paths for the log files. If left empty,
+    # Filebeat will choose the paths depending on your OS.
+    #var.paths:
+
 #------------------------------- Haproxy Module -------------------------------
 - module: haproxy
   # All logs
@@ -1502,7 +1512,7 @@ output.elasticsearch:
   # The service principal name.
   #kerberos.service_name: HTTP/my-service@realm
 
-  # Name of the Kerberos user.
+  # Name of the Kerberos user. It is used when auth_type is set to password.
   #kerberos.username: elastic
 
   # Password of the Kerberos user. It is used when auth_type is set to password.

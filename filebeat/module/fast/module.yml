@@ -1,0 +1,3 @@
+dashboards:
+- id: Filebeat-fast-log-Dashboard
+  file: Filebeat-fast-log.json

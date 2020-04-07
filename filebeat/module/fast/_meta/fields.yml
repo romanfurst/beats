@@ -1,0 +1,9 @@
+- key: fast
+  title: "fast"
+  description: >
+    fast Module
+  fields:
+    - name: fast
+      type: group
+      description: >
+      fields:
