@@ -1,0 +1,74 @@
+---
+image: "nexus3.kb.cz:18443/speed/filebeat"
+imageTag: "1.0.0-SNAPSHOT"
+imagePullSecrets:
+  - name: nexus3
+
+extraVolumeMounts:
+  - name: appl-containers
+    mountPath: /appl/docker/containers
+    readOnly: true
+
+extraVolumes:
+  - name: appl-containers
+    hostPath:
+      path: /appl/docker/containerss
+
+secretMounts:
+  - name: filebeat-tls
+    secretName: filebeat-tls-secret
+    path: /usr/share/filebeat/certs
+
+extraEnvs:
+  - name: 'FILEBEAT_SSL_KEY_PASSPHRASE'
+    valueFrom:
+      secretKeyRef:
+        name: filebeat-tls-secret
+        key: cert_key_passphrase
+
+filebeatConfig:
+  filebeat.yml: |
+    logging.level: info
+    filebeat.config.modules:
+      enabled: true
+      path: ${path.config}/modules.d/*.yml
+      reload.enabled: true
+      reload.period: 10s
+    filebeat.modules:
+    - module: fast
+
+    filebeat.autodiscover:
+      providers:
+        - type: kubernetes
+          node: ${NODE_NAME}
+          hints.enabled: true
+          hints.default_config:
+            type: container
+            paths:
+              - /appl/docker/containers/*/${data.kubernetes.container.id}*.log 
+
+    json.message_key: msg
+    json.keys_under_root: true
+    json.add_error_key: true
+    multiline.pattern: '^\s'
+    multiline.match: after
+
+    processors:
+    - add_kubernetes_metadata:
+        in_cluster: true  
+
+    output.kafka:
+      hosts: ["kafka-logman-ha-test.kb.cz:9093"]
+      version: "0.11.0.0"
+      topic: "cluster-default-in"
+      output.kafka.topics:
+      - when.contains.source: "fe-log"
+        topic: "cluster-default-in"
+      partition.round_robin:
+        reachable_only: false
+      max_message_bytes: 1000000
+      ssl.verification_mode: none
+      ssl.certificate_authorities: /usr/share/filebeat/certs/ca.pem
+      ssl.certificate: /usr/share/filebeat/certs/cert.pem
+      ssl.key: /usr/share/filebeat/certs/cert.key
+      ssl.key_passphrase: "${FILEBEAT_SSL_KEY_PASSPHRASE}"
