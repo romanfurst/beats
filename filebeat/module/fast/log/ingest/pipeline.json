@@ -3,19 +3,19 @@
   "processors": [
       {
           "set" : {
-              "field" : "msg",
+              "field" : "fast.log.meta.msg",
               "value" : "hovno",
-              "ignore_failure" : true
+              "ignore_failure" : false
           },
           "set" : {
-              "field" : "message",
+              "field" : "fast.log.meta.message",
               "value" : "prdel",
-              "ignore_failure" : true
+              "ignore_failure" : false
           },
           "rename" : {
-              "field" : "kubernetes.node.name",
-              "target_field" : "kubernet.noud.nejm",
-              "ignore_failure" : true
+              "field" : "fast.log.meta.kubernetes.node.name",
+              "target_field" : "fast.log.meta.kubernet.noud.nejm",
+              "ignore_failure" : false
           }
       }
     ],

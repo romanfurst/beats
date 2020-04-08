@@ -1,14 +1,9 @@
 type: log
 paths:
-{{ range $i, $path := .paths }}
- - {{$path}}
-{{ end }}
+  {{ range $i, $path := .paths }}
+- {{$path}}
+  {{ end }}
 exclude_files: [".gz$"]
-multiline:
-  pattern: '^\['
-  negate: true
-  match: after
-fields_under_root: true
-processors:
-  - add_kubernetes_metadata:
-      in_cluster: true
+
+json.keys_under_root: false
+json.add_error_key: true
