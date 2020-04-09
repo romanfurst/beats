@@ -1,0 +1,16 @@
+description: ""
+on_failure:
+  - set:
+      field: error.message
+      value: '{{ _ingest.on_failure_message }}'
+      ignore_missing: true
+  - set:
+      field: json.msg
+      value: 'hovno'
+      ignore_missing: true
+
+processors:
+  - set:
+      field: json.msg
+      value: 'hovno'
+      ignore_missing: true

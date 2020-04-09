@@ -1,0 +1,13 @@
+- name: log
+  type: group
+  description: >
+    Fast log lines.
+  fields:
+    - name: level
+      type: alias
+      path: json.level
+      migration: true
+    - name: message
+      type: alias
+      path: json.msg
+      migration: true

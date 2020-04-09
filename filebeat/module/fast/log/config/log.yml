@@ -6,4 +6,6 @@ paths:
 exclude_files: [".gz$"]
 
 json.keys_under_root: false
-json.add_error_key: true
+json.add_error_key: false
+json.overwrite_keys: true
+json.ignore_decoding_error: true

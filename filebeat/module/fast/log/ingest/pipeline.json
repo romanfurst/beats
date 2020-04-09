@@ -3,26 +3,57 @@
   "processors": [
       {
           "set" : {
-              "field" : "fast.log.meta.msg",
-              "value" : "hovno",
-              "ignore_failure" : false
-          },
-          "set" : {
-              "field" : "fast.log.meta.message",
-              "value" : "prdel",
-              "ignore_failure" : false
+              "field" : "message",
+              "value" : "fast.log.meta",
+              "fail_on_error" : false
+
           },
           "rename" : {
-              "field" : "fast.log.meta.kubernetes.node.name",
-              "target_field" : "fast.log.meta.kubernet.noud.nejm",
-              "ignore_failure" : false
+              "field" : "fast.log.meta.msg",
+              "value" : "message",
+              "fail_on_error" : false
+          },
+          "rename" : {
+              "field" : "kubernetes.node.name",
+              "target_field" : "kubernet.noud.nejm",
+              "fail_on_error" : false
+          },
+          "rename" : {
+              "field" : "json.msg",
+              "target_field" : "json.message",
+              "fail_on_error" : false
+          },
+          "remove" : {
+              "field" : "fast.log.meta",
+              "ignore_missing" : true
           }
       }
     ],
   "on_failure" : [{
-    "set" : {
-      "field" : "error.message",
-      "value" : "{{ _ingest.on_failure_message }}"
-    }
+      "rename" : {
+          "field" : "json",
+          "value" : "fast.log.meta",
+          "fail_on_error" : false
+
+      },
+      "rename" : {
+          "field" : "fast.log.meta.msg",
+          "value" : "message",
+          "fail_on_error" : false
+      },
+      "rename" : {
+          "field" : "kubernetes.node.name",
+          "target_field" : "kubernet.noud.nejm",
+          "fail_on_error" : false
+      },
+      "rename" : {
+          "field" : "json.msg",
+          "target_field" : "json.message",
+          "fail_on_error" : false
+      },
+      "remove" : {
+          "field" : "fast.log.meta",
+          "ignore_missing" : true
+      }
   }]
 }

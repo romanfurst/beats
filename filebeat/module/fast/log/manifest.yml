@@ -5,5 +5,5 @@ var:
     default:
       - /example/test.log*
 
-ingest_pipeline: ingest/pipeline.json
+ingest_pipeline: ingest/pipeline.yml
 input: config/log.yml

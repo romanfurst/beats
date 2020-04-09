@@ -14202,6 +14202,32 @@ fast Module
 
 
 
+
+[float]
+=== log
+
+Fast log lines.
+
+
+
+*`fast.log.level`*::
++
+--
+type: alias
+
+alias to: json.level
+
+--
+
+*`fast.log.message`*::
++
+--
+type: alias
+
+alias to: json.msg
+
+--
+
 [[exported-fields-googlecloud]]
 == Google Cloud fields
 

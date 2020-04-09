@@ -32,5 +32,5 @@ func init() {
 // AssetFast returns asset data.
 // This is the base64 encoded gzipped contents of module/fast.
 func AssetFast() string {
-	return "eJxszDEOwjAMheHdp/jVvRfwwA04REVcZBGaqHGH3h4lQrDUm997+mZedirr0kIgPLIpU38ngWTtsXsNL5tyE2AsuZd0ZBNY3XJqOpqZbXnbz+oXZzXluZejfpML8a98AgAA//+K0Si0"
+	return "eJycjj2OgzAQhXuf4okeDuBiy+32ENYyOE7GP/KYSNw+AhIEyFGkTOd5nu97LW40aQxGigKKK0wazfxsFNCT/GeXiotB40cBWH7iL/YjkwIGR9yLXpIWwXjaWPOUKZGGzXFMz02FeKTsSRzttqvB3gLX+Z2rcrRgF0i6XXYWHqR0Jz4kL7VhZ+SUJFMuGleJoasdemezWbuVPFJV6EnEWPpG6cV+ED4CAAD//w/xeu0="
 }
